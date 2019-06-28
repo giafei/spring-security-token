@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>模板</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <style type="text/css">
+        html,body {width: 100%; height:100%; padding: 0; margin: 0;}
+        body {
+            display: flex;
+        }
+
+        .left-panel {
+            background-color: #bbb;
+        }
+
+        .left-menu {
+            width: 150px;
+        }
+
+        .right-panel {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="left-panel">
+
+    <div class="left-menu">
+        <ul class="nav nav-pills  nav-stacked">
+            <li role="presentation" th:each="menu : ${@menuUIService.getAllMenu()}"
+                th:classappend="${menu.getUrl().equals(#request.getRequestURI())} ? 'active'">
+
+                <a th:href="${menu.url}">
+                    <span th:class="${menu.icon}" aria-hidden="true"></span>
+                    <span th:text="${menu.label}"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="right-panel">
+    <div class="main-content">
+        <div layout:fragment="content"></div>
+    </div>
+    <div class="footer">
+        <div class="footer-left" style="padding-left: 10px;">
+            <span>Copyright &copy; <span th:text="${T(java.time.LocalDate).now().getYear()}">2019</span></span>
+        </div>
+        <div class="footer-right"></div>
+    </div>
+</div>
+
+<div layout:fragment="foot-script"></div>
+
+
+</body>
+</html>
