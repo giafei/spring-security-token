@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+</head>
+<body>
+<div th:text="${errMsg}" style="color: red"></div>
+<form method="post" action="/login">
+    <input type="hidden" name="redirect" th:value="${redirect}">
+    <div>
+        <label for="username">用户名：</label><input type="text" name="username" id="username">
+    </div>
+    <div>
+        <label for="password">密码：</label><input type="password" name="password" id="password">
+    </div>
+
+    <div>
+        <input type="submit" value="登录">
+    </div>
+</form>
+</body>

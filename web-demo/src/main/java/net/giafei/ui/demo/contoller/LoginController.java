@@ -1,9 +1,12 @@
 package net.giafei.ui.demo.contoller;
 
+import net.giafei.ui.demo.biz.user.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * ////////////////////////////////////////////////////////////////////
@@ -31,20 +34,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *
  * @author xjf
  * @version 1.0
- * Date 2019/7/2 9:10
+ * Date 2019/7/2 11:57
  */
 
 @Controller
-public class ErrorController {
-    @RequestMapping("/401")
-    public String on401(String redirect, Model model) {
-        model.addAttribute("redirect", redirect);
+public class LoginController {
+    @Autowired
+    private IUserService userService;
+
+    @GetMapping("/login")
+    public String login() {
         return "view/login/login";
     }
 
-    @RequestMapping("/403")
-    @ResponseBody
-    public String on403(String redirect) {
-        return "您没有权限访问此功能";
+    @PostMapping("/login")
+    public String login(String redirect, String username, String password, Model model) {
+        try {
+            userService.login(username, password);
+
+            if (StringUtils.isEmpty(redirect)) {
+                redirect = "redirect:/";
+            } else {
+                redirect = "redirect:" + redirect;
+            }
+
+            return  redirect;
+        } catch (Exception e) {
+            model.addAttribute("errMsg", e.getMessage());
+            model.addAttribute("redirect", redirect);
+            return "view/login/login";
+        }
     }
 }

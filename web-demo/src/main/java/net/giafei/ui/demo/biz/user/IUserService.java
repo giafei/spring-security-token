@@ -1,9 +1,6 @@
-package net.giafei.ui.demo.security.authentication;
+package net.giafei.ui.demo.biz.user;
 
-import net.giafei.tools.security.token.authentication.ITokenProvider;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
 
 /**
  * ////////////////////////////////////////////////////////////////////
@@ -31,18 +28,9 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author xjf
  * @version 1.0
- * Date 2019/7/2 8:55
+ * Date 2019/7/2 11:31
  */
-
-@Component
-public class UrlParameterTokenProvider implements ITokenProvider {
-    @Override
-    public String getToken(HttpServletRequest request) {
-        return request.getParameter("token");
-    }
-
-    @Override
-    public int getOrder() {
-        return 0;
-    }
+public interface IUserService {
+    void login(String username, String password);
+    void logout();
 }
