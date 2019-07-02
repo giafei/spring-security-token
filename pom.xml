@@ -12,6 +12,7 @@
         <module>mvc-mapping-handler</module>
         <module>mvc-menu</module>
         <module>web-demo</module>
+        <module>security-starter</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -47,7 +47,7 @@
 
     <div class="left-menu">
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" th:each="menu : ${@menuUIService.getAllMenu()}"
+            <li role="presentation" th:each="menu : ${@menuUIService.getUserMenu()}"
                 th:classappend="${menu.getUrl().equals(#request.getRequestURI())} ? 'active'">
 
                 <a th:href="${menu.url}">

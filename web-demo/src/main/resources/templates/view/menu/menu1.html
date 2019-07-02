@@ -9,6 +9,7 @@
 <body>
 <div layout:fragment="content">
     <h2>菜单1</h2>
+    <h2>您好：<span th:text="${#request.userPrincipal.getName()}"></span></h2>
 </div>
 
 </body>

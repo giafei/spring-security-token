@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface IMenuUIService {
     List<MenuVO> getAllMenu();
+    List<MenuVO> getUserMenu();
 }
